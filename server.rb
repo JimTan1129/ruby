@@ -15,9 +15,41 @@ get '/' do
 end
 
 get '/signup' do
-  erb :signup
+  @user = User.new
+  erb :'users/signup'
 end
 
-get '/login' do
-  erb :login 
+post "signup" do
+  @user = User.new(params)
+  if @user.save
+    p "#{user.first_name} was saved to the database"
+    redirect "/thanks"
+  end
+end
+
+
+get "/thanks" do
+  erb :'users/thanks'
+end
+
+get "/login" do
+  if session[:user_id]
+    redirect "/"
+  else
+    erb :'users/login'
+  end
+end
+
+post "/login" do
+  given_password = params['password']
+  user = User.find_by(email: params['email'])
+  if user
+    if user.password == given_password
+      p "User authenticated succesfuly"
+      session[:user_id] = user.id
+      redirect "/"
+    else
+      p "Invalid email or password"
+    end
+  end
 end

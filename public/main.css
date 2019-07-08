@@ -1,0 +1,9 @@
+.button {
+  padding: 2px 9px;
+  cursor: pointer
+}
+
+#img {
+  height: 300px;
+  width: 200;
+}
