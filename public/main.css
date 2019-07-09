@@ -1,9 +1,15 @@
-.button {
-  padding: 2px 9px;
-  cursor: pointer
+body {
+  background-color: #f5f5f5;
 }
 
-#img {
-  height: 300px;
-  width: 200;
+img {
+  background-color: #f5f5f5;
+}
+
+h1 {
+  font-style: italic;
+}
+
+form {
+  text-align: center;
 }

@@ -8,35 +8,39 @@ set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 enable :sessions
 
 class User < ActiveRecord::Base
+  attr_accessor :birthday
 end
 
 get '/' do
-  erb :home
+  if session[:user_id]
+    redirect "/feed"
+  else
+    erb :home
+  end
 end
 
 get '/signup' do
-  @user = User.new
-  erb :'users/signup'
+  # @user = User.new
+  erb :signup
 end
 
-post "signup" do
+post "/signup" do
   @user = User.new(params)
   if @user.save
-    p "#{user.first_name} was saved to the database"
+    p "#{@user.first_name} was saved to the database"
     redirect "/thanks"
   end
 end
 
-
 get "/thanks" do
-  erb :'users/thanks'
+  erb :thanks
 end
 
-get "/login" do
+get '/login' do
   if session[:user_id]
-    redirect "/"
+    redirect "/feed"
   else
-    erb :'users/login'
+    erb :login
   end
 end
 
@@ -47,9 +51,19 @@ post "/login" do
     if user.password == given_password
       p "User authenticated succesfuly"
       session[:user_id] = user.id
-      redirect "/"
+      redirect "/feed"
     else
-      p "Invalid email or password"
+      p "Wrong credentials entered"
+      redirect "/login"
     end
   end
+end
+
+get "/feed" do
+  erb :feed
+end
+
+post "/logout" do
+  session.clear
+  p "You have been logged out"
 end

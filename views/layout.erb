@@ -7,7 +7,18 @@
   </head>
   <body>
 
-<img src="https://1000logos.net/wp-content/uploads/2018/01/supreme-logo.png">
+   <a href="/" style="float:left"><img style="height:100px" src="https://logos-download.com/wp-content/uploads/2016/03/Supreme_logo.jpg" alt="Home Page"></a>
+
+
+    <% if session[:user_id] %>
+      <form style="float:right" action="/logout" method="post">
+        <input type="submit"value="Log Out">
+      </form>
+      <% end %>
+      <% if request.path == '/' || request.path == '/logout' %>
+        <li><a href="/signup">Sign up</a></li>
+        <li><a href="/login">Login</a></li>
+      <% end %>
 
     <%= yield%>
   </body>
