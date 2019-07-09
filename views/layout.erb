@@ -4,20 +4,19 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="main.css">
+    <a href="/" style="float:left"><img style="height:100px" src="https://www.stickpng.com/assets/images/5a7f5f47abc3d121aba71181.png" alt="Home Page"></a>
   </head>
   <body>
-
-   <a href="/" style="float:left"><img style="height:100px" src="https://logos-download.com/wp-content/uploads/2016/03/Supreme_logo.jpg" alt="Home Page"></a>
-
-
     <% if session[:user_id] %>
       <form style="float:right" action="/logout" method="post">
         <input type="submit"value="Log Out">
       </form>
       <% end %>
       <% if request.path == '/' || request.path == '/logout' %>
+        <ul style="list-style-type:none;">
         <li><a href="/signup">Sign up</a></li>
         <li><a href="/login">Login</a></li>
+        </ul>
       <% end %>
 
     <%= yield%>

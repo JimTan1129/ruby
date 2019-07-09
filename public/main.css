@@ -8,8 +8,15 @@ img {
 
 h1 {
   font-style: italic;
+  text-align: center;
+  padding-right: 10px;
+  width: 1303px;
 }
 
 form {
   text-align: center;
+}
+
+h1{
+  padding-left: 30px;
 }

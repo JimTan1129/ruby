@@ -20,7 +20,7 @@ get '/' do
 end
 
 get '/signup' do
-  # @user = User.new
+  @user = User.new
   erb :signup
 end
 
