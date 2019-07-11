@@ -11,6 +11,12 @@ set :database, {adapter: "sqlite3", database: "./database.sqlite3"}
 
 enable :sessions
 
+
+class Category < ActiveRecord::Base
+  self.table_name = 'categories'
+end
+
+
 class User < ActiveRecord::Base
   attr_accessor :birthday
 end
@@ -24,7 +30,7 @@ get '/' do
 end
 
 get '/signup' do
-  # @user = User.new
+  @user = User.new
   erb :signup
 end
 
@@ -35,6 +41,12 @@ post "/signup" do
     redirect "/thanks"
   end
 end
+
+
+get "/users" do
+  erb :users
+end
+
 
 get "/thanks" do
   erb :thanks
@@ -57,13 +69,11 @@ post "/login" do
       session[:user_id] = user.id
       redirect "/feed"
     else
-      p "Wrong credentials entered"
+      p "Wrong password entered"
       redirect "/login"
     end
   end
 end
-
-
 
 get "/feed" do
   erb :feed
